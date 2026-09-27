@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Categories - Frosty Delights</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #fffafc;
+      color: #333;
+    }
+
+    /* Navbar */
+    header {
+      background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+      flex-wrap: wrap;
+    }
+
+    .navbar .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links li {
+      display: inline-block;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      font-size: 16px;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: white;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffeef7;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Categories Section */
+    .categories {
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .categories h2 {
+      font-size: 2.5rem;
+      color: #ff6fa3;
+      margin-bottom: 15px;
+    }
+
+    .categories p {
+      max-width: 700px;
+      margin: 0 auto 50px;
+      color: #555;
+      font-size: 1rem;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      justify-items: center;
+    }
+
+    .category-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+      width: 270px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .category-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .category-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .category-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .category-card h3 {
+      margin: 15px 0 10px;
+      font-size: 1.3rem;
+      color: #333;
+    }
+
+    .category-card button {
+      background: #ff6fa3;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      color: white;
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: background 0.3s;
+    }
+
+    .category-card button:hover {
+      background: #ff4f8b;
+    }
+
+    /* Footer */
+    footer {
+      background: #ff9a9e;
+      text-align: center;
+      color: white;
+      padding: 20px;
+      margin-top: 60px;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🌟 Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">🍨 Frosty Delights</div>
+      <!--<ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="category.html">Categories</a></li>
+        <li><a href="cart.html">🛒 Cart</a></li>
+      </ul>-->
+    </nav>
+  </header>
+
+  <!-- 🍦 Category Section -->
+  <section class="categories">
+    <h2>🍧 Explore Our Sweet Categories</h2>
+    <p>Discover our delightful range of frozen treats — from rich ice creams to soft swirls, dreamy desserts, and refreshing shakes. Each scoop brings happiness!</p>
+
+    <div class="category-grid">
+      <div class="category-card">
+        <img src="Images/cat1.jpg" alt="Ice Creams">
+        <h3>Ice Creams</h3>
+        <button onclick="location.href='icecream.html'">Explore More</button>
+      </div>
+
+      <div class="category-card">
+        <img src="Images/des1.jpg" alt="Desserts">
+        <h3>Desserts</h3>
+        <button onclick="location.href='dessert.html'">Explore More</button>
+      </div>
+
+      <div class="category-card">
+        <img src="Images/cat3.jpg" alt="Softys">
+        <h3>Softys</h3>
+        <button onclick="location.href='softy.html'">Explore More</button>
+      </div>
+
+      <div class="category-card">
+        <img src="Images/cat4.jpg" alt="Shakes">
+        <h3>Shakes</h3>
+        <button onclick="location.href='shakes.html'">Explore More</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🍓 Footer -->
+  <footer>
+    <p>© 2025 Frosty Delights | Made with ❤️ for Ice Cream Lovers</p>
+    <p>Follow us on 
+      <a href="#">Instagram</a> | 
+      <a href="#">Facebook</a> | 
+      <a href="#">Twitter</a>
+    </p>
+  </footer>
+
+</body>
+</html>

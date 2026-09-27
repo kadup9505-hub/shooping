@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Softys - Frosty Delights</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* 🌈 General Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #fff5f8, #ffeef0);
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* 🍦 Navbar */
+    header {
+      background: linear-gradient(90deg, #ff8fab, #ffcad4);
+      padding: 15px 40px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #6a1b9a;
+      text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.8);
+    }
+
+    /* 🍧 Banner */
+    .banner {
+      position: relative;
+      width: 100%;
+      height: 80vh;
+      overflow: hidden;
+    }
+
+    .banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      animation: zoomBanner 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes zoomBanner {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .banner-quotes p {
+      position: absolute;
+      top: 50%;
+      left: 40px;
+      transform: translateY(-50%);
+      color: #3ca8ac;
+      font-size: 24px;
+      font-weight: 500;
+      text-align: left;
+      max-width: 250px;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      animation: slideFade 10s infinite;
+    }
+
+    .banner-quotes p:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .banner-quotes p:nth-child(2) {
+      animation-delay: 5s;
+    }
+
+    @keyframes slideFade {
+      0%, 20% {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      30%, 70% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      80%, 100% {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+    }
+
+    /* 🔍 Search Section */
+    .search-section {
+      text-align: center;
+      margin: 50px auto 30px;
+    }
+
+    .search-box {
+      display: inline-flex;
+      align-items: center;
+      background: white;
+      border-radius: 50px;
+      padding: 10px 20px;
+      box-shadow: 0 6px 20px rgba(255, 128, 160, 0.3);
+      transition: 0.4s;
+    }
+
+    .search-box:hover {
+      transform: scale(1.05);
+    }
+
+    .search-box input {
+      border: none;
+      outline: none;
+      padding: 10px 15px;
+      font-size: 1rem;
+      border-radius: 50px;
+      width: 250px;
+    }
+
+    .search-box button {
+      border: none;
+      background: linear-gradient(90deg, #ff8fab, #ffb6c1);
+      color: white;
+      padding: 10px 25px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .search-box button:hover {
+      background: linear-gradient(90deg, #ffb6c1, #ff8fab);
+      transform: translateY(-2px);
+    }
+
+    /* 🧁 Product Grid */
+    .softy-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 30px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(255, 128, 160, 0.3);
+    }
+
+    .card img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.05);
+    }
+
+    .card-content {
+      padding: 15px;
+    }
+
+    .card-content h3 {
+      margin: 10px 0;
+      color: #ff4081;
+      font-size: 1.3rem;
+    }
+
+    .price {
+      font-size: 1.1rem;
+      color: #444;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      background: linear-gradient(90deg, #ff8fab, #ffb6c1);
+      border: none;
+      color: white;
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    .btn:hover {
+      background: linear-gradient(90deg, #ffb6c1, #ff8fab);
+      transform: translateY(-2px);
+    }
+
+    /* 🍨 Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(90deg, #ff8fab, #ffcad4);
+      color: white;
+      font-weight: 500;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 🍦 Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">🍦 Frosty Delights</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <!--<li><a href="icecream.html">Ice Creams</a></li>
+        <li><a href="softy.html" class="active">Softy</a></li>
+        <li><a href="shakes.html">Shakes</a></li>
+        <li><a href="dessert.html">Desserts</a></li>-->
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 🍧 Banner -->
+  <div class="banner">
+    <img src="Images/softy_banner.jpg" alt="Softys Banner" />
+    <div class="banner-quotes">
+      <p>“Softy in hand, happiness all around!” 🍦</p>
+      <p>“Cool treats, happy beats!” 🎵</p>
+    </div>
+  </div>
+
+  <!-- 🔍 Search Bar -->
+  <div class="search-section">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search your favorite softy..." />
+      <button onclick="searchSofty()">Search</button>
+    </div>
+  </div>
+
+  <!-- 🧁 Softys Products -->
+  <h1>🍨 Our Delicious Softys</h1>
+  <div id="softyContainer" class="softy-container"></div>
+
+  <!-- 🍨 Footer -->
+  <footer>
+    <p>© 2025 Frosty Delights | Made with ❤️ and 🍦</p>
+  </footer>
+
+  <script>
+    const softys = [
+      { name: "Butterscotch Softy", price: 60, img: "Images/softy1.jpg" },
+      { name: "Strawberry Softy", price: 70, img: "Images/softy2.jpg" },
+      { name: "Chocolate Softy", price: 65, img: "Images/softy3.jpg" },
+      { name: "Mango Softy", price: 70, img: "Images/mango.avif" },
+      { name: "Vanila Softy", price: 80, img: "Images/vanila.jpg" }
+    ];
+
+    function displaySoftys(items) {
+      const container = document.getElementById("softyContainer");
+      container.innerHTML = "";
+      items.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.name}" />
+          <div class="card-content">
+            <h3>${p.name}</h3>
+            <p class="price">₹${p.price}</p>
+            <button class="btn" onclick="viewProduct('${p.name}', ${p.price}, '${p.img}')">View Product</button>
+          </div>`;
+        container.appendChild(card);
+      });
+    }
+
+    function searchSofty() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const filtered = softys.filter(p => p.name.toLowerCase().includes(query));
+      displaySoftys(filtered.length ? filtered : []);
+      if (filtered.length === 0) {
+        document.getElementById("softyContainer").innerHTML = "<p style='text-align:center;color:#ff4081;font-size:1.2rem;'>No Softys Found!</p>";
+      }
+    }
+
+    function viewProduct(name, price, image) {
+      const product = { name, price, image };
+      localStorage.setItem("selectedProduct", JSON.stringify(product));
+      window.location.href = "product-details.html";
+    }
+
+    // Default display
+    displaySoftys(softys);
+  </script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Cart - Frosty Delights</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* 🌈 General Page Styling */
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #fff1f5, #ffe6eb);
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+
+  .cart-container {
+    max-width: 1000px;
+    margin: 60px auto;
+    background: #fff;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(255, 122, 137, 0.25);
+    padding: 40px;
+    animation: fadeIn 1s ease;
+  }
+
+  h1 {
+    text-align: center;
+    color: #ff4081;
+    margin-bottom: 35px;
+    font-size: 2.2rem;
+    position: relative;
+  }
+
+  h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #ff8fab;
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+
+  /* 🧁 Cart Items */
+  .cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px dashed #f1c6d1;
+    padding: 20px 0;
+    gap: 20px;
+    flex-wrap: wrap;
+    transition: transform 0.3s ease;
+  }
+
+  .cart-item:hover {
+    transform: translateY(-3px);
+  }
+
+  .cart-item img {
+    width: 90px;
+    height: 90px;
+    border-radius: 15px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(255, 150, 160, 0.3);
+  }
+
+  .cart-details {
+    flex: 1;
+    min-width: 220px;
+  }
+
+  .cart-details h3 {
+    margin: 0;
+    color: #ff5c93;
+    font-size: 1.3rem;
+  }
+
+  .cart-details p {
+    margin: 6px 0;
+    color: #666;
+    font-size: 1rem;
+  }
+
+  /* 🧮 Quantity Controls */
+  .quantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .quantity button {
+    border: none;
+    background: #ff8fab;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+
+  .quantity button:hover {
+    background: #ff6388;
+    transform: scale(1.1);
+  }
+
+  .quantity span {
+    min-width: 25px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #444;
+  }
+
+  /* 💰 Product Total Price */
+  .item-total {
+    font-size: 1.1rem;
+    color: #222;
+    font-weight: 600;
+  }
+
+  /* 🗑 Remove Button */
+  .btn-remove {
+    background: #ffe0e6;
+    border: none;
+    color: #ff4e78;
+    padding: 10px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  .btn-remove:hover {
+    background: #ff8fab;
+    color: white;
+  }
+
+  /* 💖 Total Summary */
+  .total {
+    text-align: right;
+    font-size: 1.4rem;
+    color: #222;
+    margin-top: 35px;
+    font-weight: 700;
+    border-top: 2px solid #ffe0eb;
+    padding-top: 20px;
+  }
+
+  /* 🛍 Checkout Button */
+  .btn-checkout {
+    display: block;
+    margin: 40px auto 0;
+    background: linear-gradient(90deg, #ff8fab, #ffb6c1);
+    color: white;
+    border: none;
+    padding: 16px 45px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 150, 160, 0.4);
+  }
+
+  .btn-checkout:hover {
+    background: linear-gradient(90deg, #ffb6c1, #ff8fab);
+    transform: translateY(-3px);
+  }
+
+  /* 🍦 Empty Cart */
+  .empty {
+    text-align: center;
+    padding: 60px;
+    font-size: 1.2rem;
+    color: #888;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 📱 Responsive */
+  @media (max-width: 700px) {
+    .cart-item {
+      flex-direction: column;
+      text-align: center;
+    }
+    .cart-details {
+      margin-bottom: 10px;
+    }
+    .item-total {
+      margin-top: 10px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="cart-container">
+  <h1>🛒 Your Cart</h1>
+  <div id="cartItems"></div>
+  <div class="total" id="cartTotal"></div>
+  <button class="btn-checkout" onclick="checkout()">Proceed to Checkout</button>
+</div>
+
+<script>
+  const cartContainer = document.getElementById("cartItems");
+  const totalDisplay = document.getElementById("cartTotal");
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  // ✅ Render Cart
+  function renderCart() {
+    cartContainer.innerHTML = "";
+    let total = 0;
+
+    if (cart.length === 0) {
+      cartContainer.innerHTML = "<p class='empty'>Your cart is empty 🍦</p>";
+      totalDisplay.textContent = "";
+      return;
+    }
+
+    cart.forEach((item, index) => {
+      const quantity = item.quantity || 1;
+      const itemTotal = item.price * quantity;
+      total += itemTotal;
+
+      const itemDiv = document.createElement("div");
+      itemDiv.className = "cart-item";
+      itemDiv.innerHTML = `
+        <img src="${item.image}" alt="${item.name}">
+        <div class="cart-details">
+          <h3>${item.name}</h3>
+          <p>Price: ₹${item.price}</p>
+          <div class="quantity">
+            <button onclick="changeQuantity(${index}, -1)">−</button>
+            <span>${quantity}</span>
+            <button onclick="changeQuantity(${index}, 1)">+</button>
+          </div>
+        </div>
+        <div class="item-total">₹${itemTotal}</div>
+        <button class="btn-remove" onclick="removeItem(${index})">Remove</button>
+      `;
+      cartContainer.appendChild(itemDiv);
+    });
+
+    totalDisplay.textContent = "Total: ₹" + total;
+  }
+
+  // ✅ Update Quantity & Price
+  function changeQuantity(index, delta) {
+    const item = cart[index];
+    item.quantity = (item.quantity || 1) + delta;
+    if (item.quantity < 1) item.quantity = 1;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+  }
+
+  // ✅ Remove Item
+  function removeItem(index) {
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+  }
+
+  // ✅ Checkout
+  function checkout() {
+    if (cart.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+    alert("Proceeding to checkout...");
+    window.location.href = "address.html";
+  }
+
+  renderCart();
+</script>
+
+</body>
+</html>

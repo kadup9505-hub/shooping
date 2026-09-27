@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details - Frosty Delights</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* 🌈 General Styling */
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fff5f8, #ffeef0);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* 🧁 Container */
+    .product-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      min-height: 90vh;
+      gap: 60px;
+      padding: 60px 40px;
+    }
+
+    /* 🍦 Product Image */
+    .product-container img {
+      width: 380px;
+      height: 380px;
+      object-fit: cover;
+      border-radius: 25px;
+      box-shadow: 0 10px 25px rgba(255, 128, 160, 0.3);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .product-container img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 35px rgba(255, 128, 160, 0.5);
+    }
+
+    /* 🍫 Product Details */
+    .details {
+      max-width: 450px;
+      background: #fff;
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 1s ease;
+    }
+
+    .details h2 {
+      font-size: 30px;
+      color: #222;
+      margin-bottom: 15px;
+    }
+
+    .details p {
+      font-size: 22px;
+      color: #ff7a9e;
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+
+    /* 🍨 Dropdown */
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: 2px solid #ffd6e0;
+      background: #fff;
+      font-size: 16px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    select:focus {
+      border-color: #ff7b89;
+      box-shadow: 0 0 5px rgba(255, 122, 137, 0.5);
+    }
+
+    /* 💖 Add to Cart Button */
+    button {
+      margin-top: 30px;
+      background: linear-gradient(90deg, #ff7b89, #ffb6c1);
+      border: none;
+      color: white;
+      padding: 14px 30px;
+      font-size: 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s ease;
+      width: 100%;
+      box-shadow: 0 5px 10px rgba(255, 122, 137, 0.3);
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #ffb6c1, #ff7b89);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 122, 137, 0.5);
+    }
+
+    /* 🔙 Back Link */
+    .back-link {
+      text-align: center;
+      margin: 25px 0 40px;
+    }
+
+    .back-link a {
+      text-decoration: none;
+      color: #ff7a9e;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .back-link a:hover {
+      color: #ff4b70;
+      text-decoration: underline;
+    }
+
+    /* ✨ Animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* 📱 Responsive */
+    @media (max-width: 768px) {
+      .product-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .details {
+        padding: 30px;
+      }
+
+      .product-container img {
+        width: 300px;
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🍧 Product Details Section -->
+  <div class="product-container">
+    <img id="productImage" src="" alt="Product Image">
+    <div class="details">
+      <h2 id="productName">Loading...</h2>
+      <p id="productPrice">₹0</p>
+
+      <label for="size">Choose Size:</label>
+      <select id="size">
+        <option value="Small">Small (100ml)</option>
+        <option value="Medium">Medium (250ml)</option>
+        <option value="Large">Large (500ml)</option>
+      </select>
+
+      <button id="addToCartBtn">Add to Cart 🛒</button>
+    </div>
+  </div>
+
+  <div class="back-link">
+    <a href="index.html">⬅ Back to Home</a>
+  </div>
+
+  <script>
+    // ✅ Load Product Details from localStorage
+    const product = JSON.parse(localStorage.getItem("selectedProduct"));
+
+    if (product) {
+      document.getElementById("productImage").src = product.image;
+      document.getElementById("productName").textContent = product.name;
+      document.getElementById("productPrice").textContent = "₹" + product.price;
+    } else {
+      document.querySelector(".details").innerHTML = "<h2>Product not found!</h2>";
+    }
+
+    // ✅ Add to Cart Function with duplicate check + redirect
+    document.getElementById("addToCartBtn").addEventListener("click", () => {
+      if (!product) return;
+
+      const size = document.getElementById("size").value;
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const cartItem = {
+        name: `${product.name} (${size})`,
+        price: product.price,
+        image: product.image,
+        size: size,
+        quantity: 1
+      };
+
+      // Check if item already exists in cart
+      const exists = cart.find(item => item.name === cartItem.name);
+      if (exists) {
+        alert("⚠️ This item is already in your cart!");
+        window.location.href = "cart.html"; // Redirect to cart page
+        return;
+      }
+
+      // Add item to cart
+      cart.push(cartItem);
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      // Success alert + redirect
+      alert(`✅ ${cartItem.name} added to your cart!`);
+      window.location.href = "cart.html";
+    });
+  </script>
+
+</body>
+</html>

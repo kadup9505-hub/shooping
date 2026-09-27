@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frosty Delights - Ice Cream Parlour</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* --- Search Bar Styling --- */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 5px 10px;
+    }
+
+    .search-bar input {
+      border: none;
+      outline: none;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+
+    .search-bar button {
+      background: #ff7eb3;
+      border: none;
+      border-radius: 20px;
+      padding: 6px 12px;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .search-bar button:hover {
+      background: #ff4f8b;
+    }
+
+    @media (max-width: 768px) {
+      .search-bar {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <h1 class="logo">🍨 Frosty Delights</h1>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="category.html">Category</a></li>
+        <li><a href="cart.html">🛒 Cart</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="admin.php">Admin</a></li>
+      </ul>
+
+      <!-- 🔍 Search Bar -->
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search desserts, shakes, ice creams...">
+        <button onclick="searchProduct()">Search</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>"You can’t buy happiness, but you can buy ice cream — and that’s kind of the same thing!"</h2>
+      <p>Refreshing scoops, soft swirls, and sweet desserts for every mood 💖</p>
+      <button onclick="location.href='icecream.html'">Explore Now</button>
+    </div>
+  </section>
+
+  <!-- Ice Cream Section -->
+  <section class="products">
+    <h2>🍦 Our Delicious Ice Creams</h2>
+    <p>Ice cream is a beloved frozen dessert, a dairy-based mixture of milk or cream, sweeteners, and flavors 
+      like vanilla or fruit, which is then frozen while being stirred to incorporate air and prevent large ice 
+      crystals, resulting in its signature smooth, creamy texture. Found in countless flavors and varieties,
+       ice cream can also be made non-dairy, offering a refreshing and satisfying treat with potential benefits 
+       like calcium and vitamin intake, a quick energy boost, and mood enhancement. </p>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="Images/choco_ice.avif" alt="Chocolate Ice Cream">
+        <h3>Chocolate Ice Cream</h3>
+        <p>₹80</p>
+        <button onclick="viewProduct('Chocolate Ice Cream', 80, 'Images/choco_ice.avif')">View Product</button>
+         <button onclick="orderProduct(2, 1)">Order Now</button>
+      </div>
+      <div class="product-card">
+        <img src="Images/stra_ice.avif" alt="Strawberry Ice Cream">
+        <h3>Strawberry Scoop</h3>
+        <p>₹70</p>
+        <button onclick="viewProduct('Strawberry Ice Cream', 70, 'Images/stra_ice.avif')">View Product</button>
+         <button onclick="orderProduct(3, 1)">Order Now</button>
+      </div>
+      <div class="product-card">
+        <img src="Images/van_ice.avif" alt="Vanilla Ice Cream">
+        <h3>Vanilla Dream</h3>
+        <p>₹60</p>
+        <button onclick="viewProduct('Vanilla Ice Cream', 60, 'Images/van_ice.avif')">View Product</button>
+        <button onclick="orderProduct(4, 1)">Order Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Softys Section -->
+  <section class="products">
+    <h2>🍧 Softys</h2>
+    <p>A softy is an informal term for a person who is excessively emotional,
+       kind, or sentimental, often showing a lack of toughness or a strong will. While a person might appear
+        strong or determined on the outside, a "softy" reveals a compassionate, tender, or easily moved nature on 
+        the inside</p>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="Images/ice_sof.avif" alt="Chocolate Softy">
+        <h3>Chocolate Softy</h3>
+        <p>₹50</p>
+        <button onclick="viewProduct('Chocolate Softy', 50, 'Images/softy1.jpg')">View Product</button>
+        <button onclick="orderProduct(5, 1)">Order Now</button>
+      </div>
+      <div class="product-card">
+        <img src="Images/pista_sof.avif" alt="Mango Softy">
+        <h3>Pista Softy</h3>
+        <p>₹55</p>
+        <button onclick="viewProduct('Pista Softy', 55, 'Images/pista_sof.avif')">View Product</button>
+        <button onclick="orderProduct(6, 1)">Order Now</button>
+      </div>
+      <div class="product-card">
+        <img src="Images/softy3.jpg" alt="Crunch Softy">
+        <h3>Crunch Softy</h3>
+        <p>₹55</p>
+        <button onclick="viewProduct('Crunch Softy', 55, 'Images/softy3.jpg')">View Product</button>
+         <button onclick="orderProduct(7, 1)">Order Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dessert Section -->
+  <section class="products">
+    <h2>🍰 Desserts</h2>
+    <p>Dessert is typically a sweet course at the end of a meal, encompassing a vast range
+       of foods from fruit and nuts to cakes, pastries, and frozen treats like ice cream and gelato. Originating
+        from the French word desservir, meaning "to clear the table," desserts vary widely across cultures, with
+         global variations such as Indian sweets featuring spices and nuts, or Russian treats like blini served
+          with honey. </p>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="Images/pushpak-dsilva-2UeBOL7UD34-unsplash (1).jpg" alt="Brownie">
+        <h3>Chocolate Brownie</h3>
+        <p>₹120</p>
+        <button onclick="viewProduct('Chocolate Brownie', 120, 'Images/pushpak-dsilva-2UeBOL7UD34-unsplash (1).jpg')">View Product</button>
+      </div>
+      <div class="product-card">
+        <img src="Images/nathan-dumlao-4axkFqj8O0Y-unsplash.jpg" alt="Sundae">
+        <h3>Hot Chocolate Sundae</h3>
+        <p>₹100</p>
+        <button onclick="viewProduct('Hot Chocolate Sundae', 100, 'Images/nathan-dumlao-4axkFqj8O0Y-unsplash.jpg')">View Product</button>
+      </div>
+      <div class="product-card">
+        <img src="Images/des1.jpg" alt="Mango Pillup">
+        <h3>Mango Pillup</h3>
+        <p>₹100</p>
+        <button onclick="viewProduct('Mango Pillup', 100, 'Images/des1.jpg')">View Product</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shakes Section -->
+  <section class="products">
+    <h2>🥤 Shakes</h2>
+    <p>"Shakes" can refer to either the rapid, involuntary movement of the body or an object, or to a sweet
+      , blended beverage made from milk, ice cream, and flavorings. The former is a trembling or vibrating 
+      motion caused by emotions like fear, cold, or excitement, while the latter is a thick, cold drink, often
+       called a milkshake, served to be consumed. </p>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="Images/shekes1.jpeg" alt="Mix Fruit Shake">
+        <h3>Mix-fruit Shake</h3>
+        <p>₹130</p>
+        <button onclick="viewProduct('Mix-fruit Shake', 130, 'Images/shekes1.jpeg')">View Product</button>
+      </div>
+      <div class="product-card">
+        <img src="Images/shakes2.jpeg" alt="Banana Shake">
+        <h3>Strawberry Shake</h3>
+        <p>₹100</p>
+        <button onclick="viewProduct('Banana Shake', 100, 'Images/shakes2.jpeg')">View Product</button>
+      </div>
+      <div class="product-card">
+        <img src="Images/shake2.jpg" alt="Oreo Shake">
+        <h3>Oreo Shake</h3>
+        <p>₹100</p>
+        <button onclick="viewProduct('Oreo Shake', 100, 'Images/shake2.jpg')">View Product</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timer Section -->
+  <section class="timer">
+    <h2>🎉 Happy Hours: 5 PM - 7 PM</h2>
+    <p>Get 20% off on all items!</p>
+    <p id="clock"></p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Frosty Delights | Made with ❤️ for Ice Cream Lovers</p>
+    <p>Follow us on 
+      <a href="#">Instagram</a> | 
+      <a href="#">Facebook</a> | 
+      <a href="#">Twitter</a>
+    </p>
+  </footer>
+
+    <!-- Footer -->
+  
+  <!-- Existing scripts -->
+  <script>
+    function viewProduct(name, price, image) {
+      const product = { name, price, image };
+      localStorage.setItem("selectedProduct", JSON.stringify(product));
+      window.location.href = "product-details.html";
+    }
+
+    function addToCart(name, price) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ name, price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(name + " added to cart!");
+    }
+
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("clock").innerText = now.toLocaleTimeString();
+    }
+    setInterval(updateClock, 1000);
+
+    // Search Function
+    function searchProduct() {
+      const query = document.getElementById("searchInput").value.trim().toLowerCase();
+      if (query.includes("ice") || query.includes("cream") || query.includes("icecream")) {
+        window.location.href = "icecream.html";
+      } else if (query.includes("softy") || query.includes("soft")) {
+        window.location.href = "softy.html";
+      } else if (query.includes("dessert") || query.includes("sweet") || query.includes("brownie")) {
+        window.location.href = "dessert,html";
+      } else if (query.includes("shake") || query.includes("milkshake")) {
+        window.location.href = "shakes.html";
+      } else if (query === "home" || query === "index") {
+        window.location.href = "index.html";
+      } else {
+        alert("No matching items found! Try 'ice cream', 'shake', or 'dessert'.");
+      }
+    }
+  </script>
+
+  <!-- ✅ Add the orderProduct script here -->
+  <script>
+    function orderProduct(productId, qty){
+        fetch('order.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'product_id=' + productId + '&quantity=' + qty
+        })
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message); // Shows success or error message
+            // Optionally, refresh stock display
+        });
+    }
+  </script>
+
+</body>
+</html>

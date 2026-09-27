@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Confirmation - Frosty Delights</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #fff5f8, #ffeef0);
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 50px auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(255, 128, 160, 0.2);
+    padding: 30px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #ff4081;
+    margin-bottom: 25px;
+  }
+
+  .section {
+    margin-bottom: 30px;
+  }
+
+  .section h2 {
+    color: #ff4081;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ffe5eb;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+
+  .address-box {
+    background: #fff8fa;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ffe0e8;
+    line-height: 1.6;
+  }
+
+  .cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #f3f3f3;
+    padding: 10px 0;
+  }
+
+  .cart-item img {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  .details {
+    flex: 1;
+    margin-left: 15px;
+  }
+
+  .details h3 {
+    margin: 0;
+    color: #ff4081;
+  }
+
+  .details p {
+    margin: 5px 0;
+    color: #666;
+  }
+
+  .total {
+    text-align: right;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #222;
+    margin-top: 20px;
+  }
+
+  .btn {
+    display: block;
+    margin: 30px auto 0;
+    background: linear-gradient(90deg, #ff8fab, #ffb6c1);
+    color: white;
+    border: none;
+    padding: 14px 35px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  .btn:hover {
+    background: linear-gradient(90deg, #ffb6c1, #ff8fab);
+  }
+
+  .empty {
+    text-align: center;
+    color: #777;
+    padding: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🎉 Order Confirmation</h1>
+
+  <div class="section">
+    <h2>Delivery Address</h2>
+    <div class="address-box" id="addressBox">Loading address...</div>
+  </div>
+
+  <div class="section">
+    <h2>Ordered Items</h2>
+    <div id="orderItems"></div>
+    <div class="total" id="orderTotal"></div>
+  </div>
+
+ <button class="btn" onclick="window.location.href='payment.html'">Choose Payment</button>
+
+</div>
+
+<script>
+  const addressData = JSON.parse(localStorage.getItem("address"));
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const addressBox = document.getElementById("addressBox");
+  const orderItems = document.getElementById("orderItems");
+  const orderTotal = document.getElementById("orderTotal");
+
+  // 🏠 Display saved address
+  if (addressData) {
+    addressBox.innerHTML = `
+      <strong>${addressData.name}</strong><br>
+      📞 ${addressData.phone}<br>
+      🏡 ${addressData.address}, ${addressData.city} - ${addressData.pincode}
+    `;
+  } else {
+    addressBox.innerHTML = "<p>No address found.</p>";
+  }
+
+  // 🛍️ Display cart items
+  if (cart.length === 0) {
+    orderItems.innerHTML = "<p class='empty'>No items in your order.</p>";
+  } else {
+    let total = 0;
+    cart.forEach(item => {
+      const itemTotal = item.price * (item.quantity || 1);
+      total += itemTotal;
+      const div = document.createElement("div");
+      div.className = "cart-item";
+      div.innerHTML = `
+        <img src="${item.image}" alt="${item.name}">
+        <div class="details">
+          <h3>${item.name}</h3>
+          <p>Price: ₹${item.price} × ${item.quantity || 1}</p>
+        </div>
+        <div>₹${itemTotal}</div>
+      `;
+      orderItems.appendChild(div);
+    });
+
+    orderTotal.textContent = "Total Amount: ₹" + total;
+  }
+
+  function showBill() {
+    window.location.href = "bill.html";
+  }
+</script>
+
+</body>
+</html>
